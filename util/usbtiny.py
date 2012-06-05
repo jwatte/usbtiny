@@ -23,22 +23,22 @@ class USBtiny:
 		bus = usb_get_busses()
 		while bus:
 			dev = bus.devices
-			bus = bus.next
+			bus = bus.__next__
 			while dev:
 				d = dev.descriptor
 				if d.idVendor == vendor \
 				and d.idProduct == product:
 					bus = None
 					break
-				dev = dev.next
+				dev = dev.__next__
 		if not dev:
-			print 'Cannot find USB device %04x:%04x' % \
-				(vendor, product)
+			print('Cannot find USB device %04x:%04x' % \
+				(vendor, product))
 			sys.exit(1)
 		self.handle = usb_open(dev)
 		if not self.handle:
-			print 'Cannot open USB device %04x:%04x' % \
-				(vendor, product)
+			print('Cannot open USB device %04x:%04x' % \
+				(vendor, product))
 			sys.exit(1)
 	def __del__(self):
 		if self.handle:
@@ -57,19 +57,17 @@ class USBtiny:
 			for i in range(16):
 				r = self.control_in(USBTINY_ECHO, v, 0, 8)
 				if not r:
-					print >> sys.stderr, \
-						"error: no response"
+					print("error: no response", file=sys.stderr)
 					sys.exit(1)
-				print "%04x" % v,
+				print("%04x" % v, end=' ')
 				w = (ord(r[3]) << 8) | ord(r[2])
 				if w != v:
-					print
-					print >> sys.stderr, \
-						"error: %04x sent," % v, \
-						"%04x received\n" % w
+					print()
+					print("error: %04x sent," % v, \
+						"%04x received\n" % w, file=sys.stderr)
 					return
 				v = ((v << 1) | (v >> 15)) & 0xffff;
-			print
+			print()
 
 def dump(addr, data):
 	if not data:
@@ -77,7 +75,7 @@ def dump(addr, data):
 	for i in range(len(data)):
 		if (i % 16) == 0:
 			if i > 0:
-				print
-			print "%04x:" % (addr + i),
-		print "%02x" % ord(data[i]),
-	print
+				print()
+			print("%04x:" % (addr + i), end=' ')
+		print("%02x" % ord(data[i]), end=' ')
+	print()

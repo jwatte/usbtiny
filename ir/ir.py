@@ -47,5 +47,5 @@ elif cmd == 'd':
 elif cmd == 's':
 	dev.control_out(LCD_DATA, 0, 0, ' '.join(arg))
 else:
-	print >> sys.stderr, usage
+	print(usage, file=sys.stderr)
 	sys.exit(1)

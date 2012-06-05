@@ -57,7 +57,7 @@ def crc_file(file, crcfunc):
 	for byte in open(file).read():
 		crc = crcfunc(crc, ord(byte))
 	crc ^= 0xffff
-	print "%02x %02x %s" % (crc & 0xff, crc >> 8, file)
+	print("%02x %02x %s" % (crc & 0xff, crc >> 8, file))
 
 tab4 = [crc_update(i, 0, 4) for i in range(2**4)]
 tab8 = [crc_update(i, 0, 8) for i in range(2**8)]

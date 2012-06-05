@@ -67,7 +67,7 @@ and not (argc == 3 and cmd in "rU")\
 and not (argc == 4 and cmd in "wcsPfe")\
 and not (argc == 5 and cmd in "FE")\
 and not (argc == 6 and cmd in "C"):
-	print >> sys.stderr, usage
+	print(usage, file=sys.stderr)
 	sys.exit(1)
 
 # --- open USB device
@@ -79,7 +79,7 @@ if cmd == 't':
 elif cmd == 'r':
 	addr = byte
 	byte = dev.control_in(USBTINY_READ, 0, addr, 1)
-	print "%02x: %02x" % (addr, ord(byte))
+	print("%02x: %02x" % (addr, ord(byte)))
 elif cmd == 'w':
 	dev.control_in(USBTINY_WRITE, byte, addr, 0)
 elif cmd == 'c':
@@ -115,9 +115,9 @@ elif cmd == 'R':
 elif cmd == 'C':
 	r = dev.control_in(USBTINY_SPI, addr + (byte << 8), c3 + (c4 << 8), 4)
 	if len(r) == 4:
-		print "%02x %02x %02x %02x" % tuple([ord(i) for i in r])
+		print("%02x %02x %02x %02x" % tuple([ord(i) for i in r]))
 	else:
-		print "No power"
+		print("No power")
 elif cmd == 'P':
 	dev.control_in(USBTINY_POLL_BYTES, addr + (byte << 8), 0, 0)
 elif cmd == 'f':
