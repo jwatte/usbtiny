@@ -159,7 +159,7 @@ static	struct			// IgorPlug-USB compatible data layout
 // ----------------------------------------------------------------------
 // Handler for timer1 input capture interrupt: edge on IR input
 // ----------------------------------------------------------------------
-ISR(SIG_TIMER1_CAPT)
+ISR(TIMER1_CAPT_vect)
 {
 	static	uint_t	prev;
 	uint_t		stamp;
@@ -217,7 +217,7 @@ ISR(SIG_TIMER1_CAPT)
 // ----------------------------------------------------------------------
 // Handler for timer1 output compare A interrupt: IR transmission timeout
 // ----------------------------------------------------------------------
-ISR(SIG_TIMER1_COMPA)
+ISR(TIMER1_COMPA_vect)
 {
 	TIMSK = 0;				// disable both IR interrupts
 	sei();					// allow USB interrupt

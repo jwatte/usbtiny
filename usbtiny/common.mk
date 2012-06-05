@@ -23,7 +23,7 @@ check	= $(shell $(CC) $1 -c -xc /dev/null -o/dev/null 2>/dev/null && echo $1)
 
 CC	= avr-gcc
 OPTIM	= -Os -ffunction-sections $(call check,-fno-split-wide-types)
-CFLAGS	= -g -Wall -I. -I$(USBTINY) $(OPTIM)
+CFLAGS	= -g -Wall -Wattributes -I. -I$(USBTINY) $(OPTIM)
 LDFLAGS	= -g -Wl,--relax,--gc-sections
 MODULES = crc.o int.o usb.o $(OBJECTS)
 UTIL	= $(USBTINY)/../util

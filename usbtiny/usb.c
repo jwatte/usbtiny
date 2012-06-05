@@ -83,7 +83,7 @@ struct
 	byte_t	length;
 	byte_t	type;
 	int	string[sizeof(USBTINY_VENDOR_NAME)-1];
-}	string_vendor PROGMEM =
+}	const string_vendor PROGMEM =
 {
 	2 * sizeof(USBTINY_VENDOR_NAME),
 	DESCRIPTOR_TYPE_STRING,
@@ -100,7 +100,7 @@ struct
 	byte_t	length;
 	byte_t	type;
 	int	string[sizeof(USBTINY_DEVICE_NAME)-1];
-}	string_device PROGMEM =
+}	const string_device PROGMEM =
 {
 	2 * sizeof(USBTINY_DEVICE_NAME),
 	DESCRIPTOR_TYPE_STRING,
@@ -117,7 +117,7 @@ struct
 	byte_t	length;
 	byte_t	type;
 	int	string[sizeof(USBTINY_SERIAL)-1];
-}	string_serial PROGMEM =
+}	const string_serial PROGMEM =
 {
 	2 * sizeof(USBTINY_SERIAL),
 	DESCRIPTOR_TYPE_STRING,
@@ -129,7 +129,7 @@ struct
 #endif
 
 #if	VENDOR_NAME_ID || DEVICE_NAME_ID || SERIAL_ID
-static	byte_t	string_langid [] PROGMEM =
+static	byte_t	const string_langid [] PROGMEM =
 {
 	4,				// bLength
 	DESCRIPTOR_TYPE_STRING,		// bDescriptorType (string)
@@ -138,7 +138,7 @@ static	byte_t	string_langid [] PROGMEM =
 #endif
 
 // Device Descriptor
-static	byte_t	descr_device [18] PROGMEM =
+static	byte_t	const descr_device [18] PROGMEM =
 {
 	18,				// bLength
 	DESCRIPTOR_TYPE_DEVICE,		// bDescriptorType
@@ -157,7 +157,7 @@ static	byte_t	descr_device [18] PROGMEM =
 };
 
 // Configuration Descriptor
-static	byte_t	descr_config [] PROGMEM =
+static	byte_t	const descr_config [] PROGMEM =
 {
 	9,				// bLength
 	DESCRIPTOR_TYPE_CONFIGURATION,	// bDescriptorType

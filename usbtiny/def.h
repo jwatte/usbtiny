@@ -36,11 +36,7 @@
 #  define USB_INT_CONFIG	MCUCR
 #endif
 #define	USB_INT_CONFIG_SET	((1 << CAT3(ISC,USBTINY_INT,1)) | (1 << CAT3(ISC,USBTINY_INT,0)))
-#if	defined SIG_INT0
-#  define USB_INT_VECTOR	CAT2(SIG_INT, USBTINY_INT)
-#else
-#  define USB_INT_VECTOR	CAT2(SIG_INTERRUPT, USBTINY_INT)
-#endif
+#define USB_INT_VECTOR    CAT3(INT, USBTINY_INT, _vect)
 
 // Interrupt enable
 #if	defined	GIMSK
